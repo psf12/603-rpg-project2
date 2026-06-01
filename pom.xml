@@ -8,6 +8,37 @@
     <properties>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
         <maven.compiler.release>25</maven.compiler.release>
-        <exec.mainClass>com.mycompany._assignment.App</exec.mainClass>
+        <!-- Entry point. Currently the Project 1 CUI main; will switch to the
+             Swing GUI launcher once the GUI layer is added in Project 2. -->
+        <exec.mainClass>Game.Game</exec.mainClass>
+        <derby.version>10.17.1.0</derby.version>
+        <junit.version>4.13.2</junit.version>
     </properties>
+    <dependencies>
+        <!-- Apache Derby - embedded database engine (Project 2 persistence) -->
+        <dependency>
+            <groupId>org.apache.derby</groupId>
+            <artifactId>derby</artifactId>
+            <version>${derby.version}</version>
+        </dependency>
+        <!-- Shared module required by the Derby engine at runtime -->
+        <dependency>
+            <groupId>org.apache.derby</groupId>
+            <artifactId>derbyshared</artifactId>
+            <version>${derby.version}</version>
+        </dependency>
+        <!-- Derby tools (ij, utilities) - convenient for setup/inspection -->
+        <dependency>
+            <groupId>org.apache.derby</groupId>
+            <artifactId>derbytools</artifactId>
+            <version>${derby.version}</version>
+        </dependency>
+        <!-- JUnit 4 - unit testing framework (Component 2.4.4) -->
+        <dependency>
+            <groupId>junit</groupId>
+            <artifactId>junit</artifactId>
+            <version>${junit.version}</version>
+            <scope>test</scope>
+        </dependency>
+    </dependencies>
 </project>
