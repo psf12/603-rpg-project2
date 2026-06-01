@@ -17,7 +17,7 @@ public abstract class Event {
     public void run(Player plr) {
         displayText(plr);
 
-        boolean choice = InputHandler.getYesNoInput();
+        boolean choice = GameIO.askYesNo();
 
         if (choice) {
             onYes(plr);
@@ -28,7 +28,7 @@ public abstract class Event {
 
     // Concrete method (shared behavior)
     public void displayText(Player plr) {
-        System.out.println(getEventText());
+        GameIO.show(getEventText());
         plr.displayStats();
     }
 

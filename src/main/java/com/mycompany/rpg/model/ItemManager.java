@@ -78,13 +78,13 @@ public class ItemManager {
                 Item currentWeapon = getCurrentWeapon();
 
                 if (currentWeapon != null) {
-                    System.out.println("You already have a weapon: " + currentWeapon.name);
-                    System.out.println("Replace it with " + item.name + "?");
+                    GameIO.show("You already have a weapon: " + currentWeapon.name);
+                    GameIO.show("Replace it with " + item.name + "?");
 
-                    boolean choice = InputHandler.getYesNoInput();
+                    boolean choice = GameIO.askYesNo();
 
                     if (!choice) {
-                        System.out.println("You keep your current weapon.");
+                        GameIO.show("You keep your current weapon.");
                         return;
                     }
 
@@ -99,14 +99,14 @@ public class ItemManager {
             player.hp += item.hp;
             player.dmg += item.dmg;
 
-            System.out.println("You received: " + item.name);
+            GameIO.show("You received: " + item.name);
     }
 
 
     // Remove last item and undo buffs
     public Item removeItem() {
         if (inventory.isEmpty()) {
-            System.out.println("Inventory is empty!");
+            GameIO.show("Inventory is empty!");
             return null;
         }
 
@@ -117,9 +117,9 @@ public class ItemManager {
     }
 
     public void printInventory() {
-        System.out.println("Inventory:");
+        GameIO.show("Inventory:");
         for (Item i : inventory) {
-            System.out.println("- " + i.name);
+            GameIO.show("- " + i.name);
         }
     }
 }

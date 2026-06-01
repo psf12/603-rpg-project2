@@ -45,7 +45,7 @@ public class BattleEvent extends Event {
 
         NPC enemy = NPCHandler.getRandomNPC(difficulty);
 
-        System.out.println("You prepare to battle " + enemy.name + "!");
+        GameIO.show("You prepare to battle " + enemy.name + "!");
         BattleHandler.fight(plr, enemy);
     }
 
@@ -55,22 +55,22 @@ public class BattleEvent extends Event {
         // Escape chance between 50% and 100%
         int escapeChance = 50 + random.nextInt(51);
 
-        System.out.println("Escape chance: " + escapeChance + "%");
-        System.out.println("Attempting to escape...");
+        GameIO.show("Escape chance: " + escapeChance + "%");
+        GameIO.show("Attempting to escape...");
 
         int roll = random.nextInt(100) + 1;
 
         if (roll <= escapeChance) {
-            System.out.println("You successfully escaped!");
+            GameIO.show("You successfully escaped!");
             return;
         }
 
         // Escape failed → forced battle
-        System.out.println("Escape failed! You are forced into battle!");
+        GameIO.show("Escape failed! You are forced into battle!");
 
         NPC enemy = NPCHandler.getRandomNPC(difficulty);
 
-        System.out.println("You must fight " + enemy.name + "!");
+        GameIO.show("You must fight " + enemy.name + "!");
         BattleHandler.fight(plr, enemy);
     }
 }

@@ -22,20 +22,20 @@ public class ChestEvent extends Event{
         Random random = new Random(); 
         int coin_flip = random.nextInt(3);
         if (coin_flip == 0){
-          System.out.println("As slow as a sloth, as patient as a rock.\nYour eyes trace the tiny entrance of the tightly closed chest, the gleam glowing brighter.\nUntil you notice that no gold is to be found, but only jagged teeth.\nIt was a mimic...");
+          GameIO.show("As slow as a sloth, as patient as a rock.\nYour eyes trace the tiny entrance of the tightly closed chest, the gleam glowing brighter.\nUntil you notice that no gold is to be found, but only jagged teeth.\nIt was a mimic...");
           plr.takeDMG(15);
         }else{
           Item item = plr.itemManager.getRandomItem();
           
-          System.out.println("You noted that you should trust your gut more.\nYou found an item!");
+          GameIO.show("You noted that you should trust your gut more.\nYou found an item!");
           item.displayItem();
-          boolean choice = InputHandler.getYesNoInput();
+          boolean choice = GameIO.askYesNo();
           if (choice){
               plr.itemManager.addItem(item);
             }
         }
     }
     protected void onNo(Player plr){
-        System.out.println("Your boring decision damages whatever pride you have left...");
+        GameIO.show("Your boring decision damages whatever pride you have left...");
     }
 }

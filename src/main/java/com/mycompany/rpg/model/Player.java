@@ -32,16 +32,16 @@ public class Player {
 
     public void takeDMG(int dmg){
         this.hp -= dmg;
-        System.out.println(dmg + " DMG taken!");
+        GameIO.show(dmg + " DMG taken!");
     }
     
     public void Heal(int amount){
         this.hp += amount;
-        System.out.println(amount + " Healed!");
+        GameIO.show(amount + " Healed!");
     }
 
     public void displayStats() {
-        System.out.println("HP: " + hp + " | DMG: " + dmg);
+        GameIO.show("HP: " + hp + " | DMG: " + dmg);
     }
     public void printEffects() {
         HashMap<String, Integer> effectCounts = new HashMap<>();
@@ -54,13 +54,13 @@ public class Player {
         }
 
         if (effectCounts.isEmpty()) {
-            System.out.println("No active effects.");
+            GameIO.show("No active effects.");
             return;
         }
 
-        System.out.println("Active Effects:");
+        GameIO.show("Active Effects:");
         for (var entry : effectCounts.entrySet()) {
-            System.out.println(" - " + entry.getKey() + " x " + entry.getValue());
+            GameIO.show(" - " + entry.getKey() + " x " + entry.getValue());
         }
     }
 

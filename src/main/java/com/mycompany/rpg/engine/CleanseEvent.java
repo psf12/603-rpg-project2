@@ -20,29 +20,29 @@ public class CleanseEvent extends Event {
     @Override
     public void displayText(Player plr) {
 
-        System.out.println("You stumble upon a tranquil, shimmering lake.");
-        System.out.println("Its waters radiate a soothing, purifying aura.");
-        System.out.println("Before making your choice, you inspect yourself...");
+        GameIO.show("You stumble upon a tranquil, shimmering lake.");
+        GameIO.show("Its waters radiate a soothing, purifying aura.");
+        GameIO.show("Before making your choice, you inspect yourself...");
 
         // Print inventory
-        System.out.println("\n--- Current Inventory ---");
+        GameIO.show("\n--- Current Inventory ---");
         if (plr.itemManager.inventory.isEmpty()) {
-            System.out.println("Inventory is empty.");
+            GameIO.show("Inventory is empty.");
         } else {
             for (Item item : plr.itemManager.inventory) {
-                System.out.println("- " + item.name + " (" + item.type + ")");
+                GameIO.show("- " + item.name + " (" + item.type + ")");
             }
         }
 
         // Print effects
-        System.out.println("\n--- Current Effects ---");
+        GameIO.show("\n--- Current Effects ---");
         plr.printEffects();
 
         // Print stats
-        System.out.println("\n--- Player Stats ---");
+        GameIO.show("\n--- Player Stats ---");
         plr.displayStats();
 
-        System.out.println("\nDo you dare cleanse yourself in the lake?");
+        GameIO.show("\nDo you dare cleanse yourself in the lake?");
     }
 
     @Override
@@ -52,7 +52,7 @@ public class CleanseEvent extends Event {
 
     @Override
     protected void onYes(Player plr) {
-        System.out.println("You step into the lake... A cleansing force washes over you.");
+        GameIO.show("You step into the lake... A cleansing force washes over you.");
 
         Iterator<Item> it = plr.itemManager.inventory.iterator();
         int removedCount = 0;
@@ -67,31 +67,31 @@ public class CleanseEvent extends Event {
         }
 
         if (removedCount == 0) {
-            System.out.println("But nothing happens... You had no curses or blessings.");
+            GameIO.show("But nothing happens... You had no curses or blessings.");
             return;
         }
 
         int healAmount = removedCount * 5;
         plr.Heal(healAmount);
 
-        System.out.println("The lake restores your vitality.");
-        System.out.println("You were cleansed of " + removedCount + " item(s).");
-        System.out.println("You healed " + healAmount + " HP.");
+        GameIO.show("The lake restores your vitality.");
+        GameIO.show("You were cleansed of " + removedCount + " item(s).");
+        GameIO.show("You healed " + healAmount + " HP.");
     }
 
     @Override
     protected void onNo(Player plr) {
-        System.out.println("You cautiously dip your hand into the water...");
+        GameIO.show("You cautiously dip your hand into the water...");
 
         for (Item item : plr.itemManager.inventory) {
             if (item.type == ItemType.CURSE) {
-                System.out.println("A curse has been lifted: " + item.name);
+                GameIO.show("A curse has been lifted: " + item.name);
                 item.remove(plr);
                 plr.itemManager.inventory.remove(item);
                 return;
             }
         }
 
-        System.out.println("But you had no curses to cleanse.");
+        GameIO.show("But you had no curses to cleanse.");
     }
 }

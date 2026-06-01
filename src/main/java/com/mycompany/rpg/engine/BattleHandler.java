@@ -45,8 +45,8 @@ public class BattleHandler {
             plr.Heal(hpGain); 
             plr.dmg += dmgGain;
 
-            System.out.println("You absorbed power from " + npc.name + "!");
-            System.out.println("Gained +" + hpGain + " HP and +" + dmgGain + " DMG");
+            GameIO.show("You absorbed power from " + npc.name + "!");
+            GameIO.show("Gained +" + hpGain + " HP and +" + dmgGain + " DMG");
         }
 
         displayBattleResult(plr.isAlive(), npc);
@@ -56,9 +56,9 @@ public class BattleHandler {
     // Displays result of the fight
     public static void displayBattleResult(boolean result, NPC npc) {
         if (result) {
-            System.out.println(npc.name + " Defeated!");
+            GameIO.show(npc.name + " Defeated!");
         } else {
-            System.out.println("You were defeated by " + npc.name + "!");
+            GameIO.show("You were defeated by " + npc.name + "!");
         }
     }
 }

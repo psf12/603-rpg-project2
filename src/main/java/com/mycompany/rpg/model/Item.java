@@ -42,16 +42,16 @@ public class Item {
     }
 
     public void displayItem() {
-        System.out.println("Item: " + name);
-        System.out.println("Type: " + type);
-        System.out.println("HP Bonus: " + hp);
-        System.out.println("DMG Bonus: " + dmg);
+        GameIO.show("Item: " + name);
+        GameIO.show("Type: " + type);
+        GameIO.show("HP Bonus: " + hp);
+        GameIO.show("DMG Bonus: " + dmg);
     }
 
     public void remove(Player p) {
         p.hp -= this.hp;
         p.dmg -= this.dmg;
-        System.out.println("Removed: " + name);
+        GameIO.show("Removed: " + name);
     }
 }
 

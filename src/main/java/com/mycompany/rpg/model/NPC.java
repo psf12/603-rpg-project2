@@ -21,7 +21,7 @@ public class NPC extends Player {
 
     // Optional: display NPC info
     public void displayInfo() {
-        System.out.println("NPC: " + name);
+        GameIO.show("NPC: " + name);
         displayStats(); // inherited from Player
     }
 }

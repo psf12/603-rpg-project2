@@ -18,18 +18,18 @@ public class CursedStatueEvent extends Event {
     @Override
     public void displayText(Player plr) {
 
-        System.out.println("A towering statue carved from obsidian looms before you.");
-        System.out.println("Its eyes glow faintly, whispering promises of power...");
+        GameIO.show("A towering statue carved from obsidian looms before you.");
+        GameIO.show("Its eyes glow faintly, whispering promises of power...");
 
         // Show effects BEFORE choice
-        System.out.println("\n--- Current Effects ---");
+        GameIO.show("\n--- Current Effects ---");
         plr.printEffects();
 
         // Show stats
-        System.out.println("\n--- Player Stats ---");
+        GameIO.show("\n--- Player Stats ---");
         plr.displayStats();
 
-        System.out.println("\nWill you offer a sacrifice?");
+        GameIO.show("\nWill you offer a sacrifice?");
     }
 
     @Override
@@ -39,30 +39,30 @@ public class CursedStatueEvent extends Event {
 
     @Override
     protected void onYes(Player plr) {
-        System.out.println("You place your hand upon the statue... It drains your life!");
+        GameIO.show("You place your hand upon the statue... It drains your life!");
 
         plr.takeDMG(20);
 
         Item buff = plr.itemManager.getItemOfType(ItemType.BUFF);
 
         if (buff == null) {
-            System.out.println("But no blessings respond to your sacrifice...");
+            GameIO.show("But no blessings respond to your sacrifice...");
             return;
         }
 
-        System.out.println("A blessing manifests before you!");
+        GameIO.show("A blessing manifests before you!");
         buff.displayItem();
         plr.itemManager.addItem(buff);
     }
 
     @Override
     protected void onNo(Player plr) {
-        System.out.println("You refuse the statue's offer... It curses you!");
+        GameIO.show("You refuse the statue's offer... It curses you!");
 
         Item curse = plr.itemManager.getItemOfType(ItemType.CURSE);
 
         if (curse == null) {
-            System.out.println("But no curses answer the call...");
+            GameIO.show("But no curses answer the call...");
             return;
         }
 
