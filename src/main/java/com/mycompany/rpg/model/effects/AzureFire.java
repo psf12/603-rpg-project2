@@ -2,15 +2,18 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
  * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
  */
-package Game;
+package com.mycompany.rpg.model.effects;
+import com.mycompany.rpg.model.*;
+
 
 /**
  *
  * @author balla
  */
-public enum ItemType {
-    NONE,
-    BUFF,
-    CURSE,
-    WEAPON
+public class AzureFire extends Fire implements Effects{
+    @Override
+    public void OnEventStart(Player plr){
+        plr.takeDMG(15);
+    }
+    
 }

@@ -10,7 +10,7 @@
         <maven.compiler.release>25</maven.compiler.release>
         <!-- Entry point. Currently the Project 1 CUI main; will switch to the
              Swing GUI launcher once the GUI layer is added in Project 2. -->
-        <exec.mainClass>Game.Game</exec.mainClass>
+        <exec.mainClass>com.mycompany.rpg.App</exec.mainClass>
         <derby.version>10.17.1.0</derby.version>
         <junit.version>4.13.2</junit.version>
     </properties>

@@ -2,10 +2,12 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
  * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
  */
-package SubClasses;
+package com.mycompany.rpg.engine;
+import com.mycompany.rpg.model.*;
+import com.mycompany.rpg.model.effects.*;
+import com.mycompany.rpg.ui.*;
 
 import java.util.Random;
-import Game.*;
 /**
  *
  * @author balla

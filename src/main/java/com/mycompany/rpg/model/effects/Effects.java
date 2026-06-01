@@ -2,13 +2,13 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
  * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Interface.java to edit this template
  */
-package Effects;
+package com.mycompany.rpg.model.effects;
+import com.mycompany.rpg.model.*;
 
 /**
  *
  * @author balla
  */
-import Game.*;
 public interface Effects {
     default void OnBattleEnd(Player plr){}
     default void OnEventEnd(Player plr){}

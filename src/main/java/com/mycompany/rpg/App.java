@@ -2,23 +2,26 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
  * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
  */
-package Game;
+package com.mycompany.rpg;
 
 /**
  *
  * @author balla
  */
-import Effects.*;
+import com.mycompany.rpg.model.*;
+import com.mycompany.rpg.model.effects.*;
+import com.mycompany.rpg.engine.*;
+import com.mycompany.rpg.ui.*;
 import java.io.*;
 
-public class Game {
+public class App {
 
     private int score = 0;
     private static final String HIGHSCORE_FILE = "highscore.txt";
 
     public static void main(String[] args) {
 
-        Game game = new Game();
+        App game = new App();
 
         Player plr = new Player(100, 10);   // Example starting stats
         EventHandler eventHandler = new EventHandler();
