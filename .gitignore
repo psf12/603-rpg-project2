@@ -1,0 +1,25 @@
+# --- Maven build output ---
+target/
+
+# --- NetBeans ---
+nbproject/private/
+nbproject/Makefile-*.mk
+nbproject/Package-*.bash
+build/
+nbbuild/
+dist/
+nbdist/
+.nb-gradle/
+
+# --- IntelliJ / other IDEs ---
+.idea/
+*.iml
+*.iws
+.vscode/
+
+# --- Apache Derby (embedded DB runtime files — generated on run) ---
+derby.log
+
+# --- OS junk ---
+Thumbs.db
+.DS_Store
