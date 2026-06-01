@@ -46,7 +46,13 @@ public class GameEngine {
         GameIO.show("Passing the eleventh hour.");
         GameIO.waitForContinue();
 
-        int savedHighScore = scoreDao.getHighScore();
+        int savedHighScore;
+        try {
+            savedHighScore = scoreDao.getHighScore();
+        } catch (RuntimeException e) {
+            savedHighScore = 0;
+            GameIO.show("(Could not load the high score.)");
+        }
         GameIO.show("Current High Score: " + savedHighScore);
 
         while (player.isAlive()) {
@@ -90,20 +96,36 @@ public class GameEngine {
         return score;
     }
 
+    /** Maximum player-name length the database column accepts. */
+    private static final int MAX_NAME_LENGTH = 50;
+
     /** Ask the player's name and persist this run's score via the DAO. */
     private void recordScore() {
         String name = GameIO.askText("Enter your name for the leaderboard:");
         if (name == null || name.isBlank()) {
             name = "Anonymous";
         }
-        scoreDao.addScore(new ScoreEntry(name, score));
+        if (name.length() > MAX_NAME_LENGTH) {
+            name = name.substring(0, MAX_NAME_LENGTH); // fit the VARCHAR(50) column
+        }
+        try {
+            scoreDao.addScore(new ScoreEntry(name, score));
+        } catch (RuntimeException e) {
+            GameIO.show("(Your score could not be saved.)");
+        }
     }
 
     /** Display the top scores read back from the database. */
     private void showLeaderboard() {
         GameIO.show("");
         GameIO.show("===== LEADERBOARD (Top " + LEADERBOARD_SIZE + ") =====");
-        List<ScoreEntry> top = scoreDao.getTopScores(LEADERBOARD_SIZE);
+        List<ScoreEntry> top;
+        try {
+            top = scoreDao.getTopScores(LEADERBOARD_SIZE);
+        } catch (RuntimeException e) {
+            GameIO.show("(Leaderboard unavailable.)");
+            return;
+        }
         if (top.isEmpty()) {
             GameIO.show("No scores yet.");
             return;

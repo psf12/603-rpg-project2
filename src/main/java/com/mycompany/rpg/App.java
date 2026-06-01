@@ -8,6 +8,7 @@ import com.mycompany.rpg.model.Player;
 import com.mycompany.rpg.ui.ConsoleView;
 import com.mycompany.rpg.ui.GameIO;
 import com.mycompany.rpg.ui.MainFrame;
+import javax.swing.JOptionPane;
 import javax.swing.SwingUtilities;
 import javax.swing.UIManager;
 
@@ -27,8 +28,21 @@ public class App {
         boolean console = args.length > 0 && "--console".equalsIgnoreCase(args[0]);
 
         // Data-access layer: embedded Derby database + DAO (auto-created).
-        Database database = Database.getInstance();
-        ScoreDAO scoreDao = new DerbyScoreDAO(database.getConnection());
+        Database database;
+        ScoreDAO scoreDao;
+        try {
+            database = Database.getInstance();
+            scoreDao = new DerbyScoreDAO(database.getConnection());
+        } catch (RuntimeException e) {
+            String message = "The game database could not be started:\n" + e.getMessage();
+            if (console) {
+                System.err.println(message);
+            } else {
+                JOptionPane.showMessageDialog(null, message, "Database Error",
+                        JOptionPane.ERROR_MESSAGE);
+            }
+            return;
+        }
         // Ensure Derby is shut down cleanly however the program exits.
         Runtime.getRuntime().addShutdownHook(new Thread(database::shutdown));
 

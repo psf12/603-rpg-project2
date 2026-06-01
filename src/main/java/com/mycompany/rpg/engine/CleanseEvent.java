@@ -88,11 +88,14 @@ public class CleanseEvent extends Event {
     protected void onNo(Player plr) {
         GameIO.show("You cautiously dip your hand into the water...");
 
-        for (Item item : plr.itemManager.inventory) {
+        Iterator<Item> it = plr.itemManager.inventory.iterator();
+        while (it.hasNext()) {
+            Item item = it.next();
             if (item.type == ItemType.CURSE) {
                 GameIO.show("A curse has been lifted: " + item.name);
                 item.remove(plr);
-                plr.itemManager.inventory.remove(item);
+                it.remove();
+                plr.fireStatsChanged();
                 return;
             }
         }
