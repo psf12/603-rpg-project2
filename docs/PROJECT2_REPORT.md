@@ -1,7 +1,7 @@
 # Project 2 Report — RPG Game (GUI + Database Extension)
 
 **Course:** COMP603 / ENSE600 — Program Design & Construction / Software Construction
-**Group:** 67  **Students:** 23207340, 23207490
+**Group:** 67  **Students:** 23207490, 23207340
 **GitHub repository:** https://github.com/psf12/603-rpg-project2
 
 > This report covers **Project 2 only**. Project 1's requirements (Component 1.2)
@@ -220,8 +220,8 @@ GenAI was used, (2) the system functionality, and (3) the overall code structure
 ---
 
 ## Contribution report  **[TEAM — fill in]**
-- **23207340** — _contribution description_ — _%_
 - **23207490** — _contribution description_ — _%_
+- **23207340** — _contribution description_ — _%_
 
 > (If a member contributes less than 40%, their mark may be capped; ensure both
 > percentages reflect the real split.)
