@@ -41,4 +41,8 @@ public final class GameIO {
     public static void waitForContinue() {
         view.waitForContinue();
     }
+
+    public static String askText(String prompt) {
+        return view.askText(prompt);
+    }
 }

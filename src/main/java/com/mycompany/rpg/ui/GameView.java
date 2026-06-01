@@ -25,4 +25,12 @@ public interface GameView {
 
     /** Pause until the user acknowledges they are ready to continue. */
     void waitForContinue();
+
+    /**
+     * Prompt the user for a line of free text (e.g. their name) and return it.
+     *
+     * @param prompt the message shown before reading input
+     * @return the text the user entered (trimmed)
+     */
+    String askText(String prompt);
 }

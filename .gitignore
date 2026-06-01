@@ -23,3 +23,6 @@ derby.log
 # --- OS junk ---
 Thumbs.db
 .DS_Store
+
+# Apache Derby embedded database directory (generated at runtime)
+rpgdb/

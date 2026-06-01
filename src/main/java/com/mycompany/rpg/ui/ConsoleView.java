@@ -41,4 +41,10 @@ public class ConsoleView implements GameView {
         System.out.println("=============================================");
         scanner.nextLine();
     }
+
+    @Override
+    public String askText(String prompt) {
+        System.out.print(prompt + " ");
+        return scanner.nextLine().trim();
+    }
 }

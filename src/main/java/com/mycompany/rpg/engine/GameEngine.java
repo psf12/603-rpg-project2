@@ -1,9 +1,10 @@
 package com.mycompany.rpg.engine;
 
+import com.mycompany.rpg.dao.ScoreDAO;
 import com.mycompany.rpg.model.*;
 import com.mycompany.rpg.model.effects.*;
 import com.mycompany.rpg.ui.*;
-import java.io.*;
+import java.util.List;
 
 /**
  * Drives the core game loop.
@@ -14,21 +15,23 @@ import java.io.*;
  * touches System.out / Scanner directly, it speaks to the active presentation
  * through {@link GameIO}.
  *
- * High-score persistence is still file-based here; it is replaced by a Derby
- * data-access layer in Project 2 Step 3.
+ * High-score persistence is delegated to a {@link ScoreDAO} (data-access
+ * layer), so the engine has no knowledge of how or where scores are stored.
  *
  * @author balla
  */
 public class GameEngine {
 
-    private static final String HIGHSCORE_FILE = "highscore.txt";
+    private static final int LEADERBOARD_SIZE = 5;
 
     private final Player player;
+    private final ScoreDAO scoreDao;
     private final EventHandler eventHandler = new EventHandler();
     private int score = 0;
 
-    public GameEngine(Player player) {
+    public GameEngine(Player player, ScoreDAO scoreDao) {
         this.player = player;
+        this.scoreDao = scoreDao;
     }
 
     /** Run a full game from intro to game-over. */
@@ -42,7 +45,7 @@ public class GameEngine {
         GameIO.show("You question: 'Can I make it back alive?'");
         GameIO.waitForContinue();
 
-        int savedHighScore = loadHighScore();
+        int savedHighScore = scoreDao.getHighScore();
         GameIO.show("Current High Score: " + savedHighScore);
 
         while (player.isAlive()) {
@@ -71,37 +74,40 @@ public class GameEngine {
 
         if (score > savedHighScore) {
             GameIO.show("New High Score!");
-            saveHighScore(score);
         } else {
             GameIO.show("High Score remains: " + savedHighScore);
         }
+
+        recordScore();
+        showLeaderboard();
     }
 
     public int getScore() {
         return score;
     }
 
-    // -----------------------------
-    // High Score File I/O
-    // -----------------------------
-
-    private int loadHighScore() {
-        File file = new File(HIGHSCORE_FILE);
-        if (!file.exists()) {
-            return 0; // No high score yet
+    /** Ask the player's name and persist this run's score via the DAO. */
+    private void recordScore() {
+        String name = GameIO.askText("Enter your name for the leaderboard:");
+        if (name == null || name.isBlank()) {
+            name = "Anonymous";
         }
-        try (BufferedReader br = new BufferedReader(new FileReader(file))) {
-            return Integer.parseInt(br.readLine());
-        } catch (Exception e) {
-            return 0; // If file corrupted, reset
-        }
+        scoreDao.addScore(new ScoreEntry(name, score));
     }
 
-    private void saveHighScore(int score) {
-        try (BufferedWriter bw = new BufferedWriter(new FileWriter(HIGHSCORE_FILE))) {
-            bw.write(String.valueOf(score));
-        } catch (IOException e) {
-            GameIO.show("Error saving high score.");
+    /** Display the top scores read back from the database. */
+    private void showLeaderboard() {
+        GameIO.show("");
+        GameIO.show("===== LEADERBOARD (Top " + LEADERBOARD_SIZE + ") =====");
+        List<ScoreEntry> top = scoreDao.getTopScores(LEADERBOARD_SIZE);
+        if (top.isEmpty()) {
+            GameIO.show("No scores yet.");
+            return;
+        }
+        int rank = 1;
+        for (ScoreEntry entry : top) {
+            GameIO.show(rank + ". " + entry.getPlayerName() + " - " + entry.getScore());
+            rank++;
         }
     }
 }
