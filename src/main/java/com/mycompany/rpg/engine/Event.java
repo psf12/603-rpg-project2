@@ -32,6 +32,15 @@ public abstract class Event {
         plr.displayStats();
     }
 
+    /**
+     * Base file-name (without extension) of the scene image shown for this
+     * event. A graphical front-end looks for {@code images/<name>.png}.
+     * Subclasses override this to point at their own image.
+     */
+    public String getImageName() {
+        return "event";
+    }
+
     // Each event provides its own text
     protected abstract String getEventText();
 

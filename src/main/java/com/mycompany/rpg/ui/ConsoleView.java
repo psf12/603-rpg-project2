@@ -47,4 +47,9 @@ public class ConsoleView implements GameView {
         System.out.print(prompt + " ");
         return scanner.nextLine().trim();
     }
+
+    @Override
+    public void showImage(String imageName) {
+        // Images are a graphical concern; the console view has nothing to show.
+    }
 }

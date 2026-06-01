@@ -18,6 +18,11 @@ import java.util.Iterator;
 public class CleanseEvent extends Event {
 
     @Override
+    public String getImageName() {
+        return "cleanse";
+    }
+
+    @Override
     public void displayText(Player plr) {
 
         GameIO.show("You stumble upon a tranquil, shimmering lake.");

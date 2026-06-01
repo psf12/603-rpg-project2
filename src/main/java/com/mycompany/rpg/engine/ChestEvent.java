@@ -14,6 +14,11 @@ import java.util.Random;
  */
 public class ChestEvent extends Event{
     @Override
+    public String getImageName() {
+        return "chest";
+    }
+
+    @Override
     protected String getEventText(){
         String text = "A small glitter dances in the corner of your vision\nUpon slowly treading towards it, you notice its silhoutte.\nits a chest! What secrets could it hold?\nBut randomly here in this lustrous forest...?\nWill you trust your adventurer gut?";
         return text;

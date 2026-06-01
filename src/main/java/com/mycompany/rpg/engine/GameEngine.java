@@ -36,6 +36,7 @@ public class GameEngine {
 
     /** Run a full game from intro to game-over. */
     public void run() {
+        GameIO.showImage("intro");
         GameIO.show("They said grandmother lives in the forest.");
         GameIO.show("You tread forth, repeatedly checking your back; the light of the entrance slowly shrinking");
         GameIO.show("'Could they have been lying?', you question. But its too late.");
@@ -56,6 +57,7 @@ public class GameEngine {
             }
 
             Event event = eventHandler.getRandomEvent();
+            GameIO.showImage(event.getImageName());
             event.run(player);
 
             score++;
@@ -69,6 +71,7 @@ public class GameEngine {
             GameIO.waitForContinue();
         }
 
+        GameIO.showImage("gameover");
         GameIO.show("GAME OVER!");
         GameIO.show("Final Score: " + score);
 

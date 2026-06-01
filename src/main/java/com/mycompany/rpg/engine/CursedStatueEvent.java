@@ -16,6 +16,11 @@ import com.mycompany.rpg.ui.*;
 public class CursedStatueEvent extends Event {
 
     @Override
+    public String getImageName() {
+        return "cursed_statue";
+    }
+
+    @Override
     public void displayText(Player plr) {
 
         GameIO.show("A towering statue carved from obsidian looms before you.");

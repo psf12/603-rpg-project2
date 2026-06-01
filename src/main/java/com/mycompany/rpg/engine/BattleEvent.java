@@ -22,6 +22,11 @@ public class BattleEvent extends Event {
     private String diffName;    // Easy / Medium / Hard
 
     @Override
+    public String getImageName() {
+        return "battle";
+    }
+
+    @Override
     protected String getEventText() {
 
         // Choose difficulty BEFORE player chooses yes/no

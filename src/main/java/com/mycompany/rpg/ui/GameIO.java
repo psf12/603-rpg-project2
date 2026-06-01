@@ -45,4 +45,8 @@ public final class GameIO {
     public static String askText(String prompt) {
         return view.askText(prompt);
     }
+
+    public static void showImage(String imageName) {
+        view.showImage(imageName);
+    }
 }

@@ -33,4 +33,12 @@ public interface GameView {
      * @return the text the user entered (trimmed)
      */
     String askText(String prompt);
+
+    /**
+     * Display the scene image associated with the given name. Graphical views
+     * look for {@code images/<imageName>.png}; the console view ignores this.
+     *
+     * @param imageName base file-name (no extension) of the image to show
+     */
+    void showImage(String imageName);
 }
