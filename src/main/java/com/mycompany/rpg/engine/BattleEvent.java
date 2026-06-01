@@ -48,7 +48,7 @@ public class BattleEvent extends Event {
     @Override
     protected void onYes(Player plr) {
 
-        NPC enemy = NPCHandler.getRandomNPC(difficulty);
+        NPC enemy = NPCFactory.createRandomNPC(difficulty);
 
         GameIO.show("You prepare to battle " + enemy.name + "!");
         BattleHandler.fight(plr, enemy);
@@ -73,7 +73,7 @@ public class BattleEvent extends Event {
         // Escape failed → forced battle
         GameIO.show("Escape failed! You are forced into battle!");
 
-        NPC enemy = NPCHandler.getRandomNPC(difficulty);
+        NPC enemy = NPCFactory.createRandomNPC(difficulty);
 
         GameIO.show("You must fight " + enemy.name + "!");
         BattleHandler.fight(plr, enemy);

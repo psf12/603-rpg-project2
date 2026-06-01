@@ -3,7 +3,6 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
  */
 package com.mycompany.rpg.model;
-import com.mycompany.rpg.model.effects.*;
 import com.mycompany.rpg.ui.*;
 
 /**
@@ -11,21 +10,8 @@ import com.mycompany.rpg.ui.*;
  * @author balla
  */
 import java.util.ArrayList;
-import java.util.Random;
 
 public class ItemManager {
-
-    // Master list of all possible items
-    public static Item[] ITEMS = new Item[]{
-        new Item("Vampire Shard", 25, 0).setType(ItemType.CURSE).addEffect(new Bleed()),
-        new Item("Blazing Soul", 5, 5).setType(ItemType.CURSE).addEffect(new Fire()),
-        new Item("Blue Ash", 0, 15).setType(ItemType.CURSE).addEffect(new AzureFire()), 
-        new Item("Goldilocks Flower", 0, -1).setType(ItemType.BUFF).addEffect(new WeakHeal()),
-        new Item("Journeyman Dagger", 0, 15).setType(ItemType.WEAPON),
-        new Item("Hero Sword", 0, 25).setType(ItemType.WEAPON)
-    };
-
-    private static final Random random = new Random();
 
     // Player inventory
     public ArrayList<Item> inventory = new ArrayList<>();
@@ -36,27 +22,16 @@ public class ItemManager {
         this.player = player;
     }
 
-    // Get a random item from the master list
+    // Get a fresh random item (built by the factory, never a shared instance)
     public static Item getRandomItem() {
-        int index = random.nextInt(ITEMS.length);
-        return ITEMS[index];
+        return ItemFactory.createRandom();
     }
-    
-    // Get an item that is a type of that class
+
+    // Get a fresh random item of the given type
     public Item getItemOfType(ItemType type) {
-        ArrayList<Item> matches = new ArrayList<>();
-
-        for (Item i : ITEMS) {
-            if (i.type == type) {
-                matches.add(i);
-            }
-        }
-
-        if (matches.isEmpty()) return null;
-
-        return matches.get(random.nextInt(matches.size()));
+        return ItemFactory.createOfType(type);
     }
-    
+
     private Item getCurrentWeapon() {
         for (Item i : inventory) {
             if (i.type == ItemType.WEAPON) {
