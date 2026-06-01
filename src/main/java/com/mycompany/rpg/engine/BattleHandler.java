@@ -29,6 +29,7 @@ public class BattleHandler {
             plr.hp -= npc.dmg;
             npc.hp -= plr.dmg;
         }
+        plr.fireStatsChanged(); // reflect HP lost during the fight
 
         // Trigger OnBattleEnd effects
         for (Item item : plr.itemManager.inventory) {

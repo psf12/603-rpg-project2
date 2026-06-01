@@ -1,5 +1,7 @@
 package com.mycompany.rpg.ui;
 
+import com.mycompany.rpg.model.Player;
+import com.mycompany.rpg.model.PlayerListener;
 import java.awt.BorderLayout;
 import java.awt.Dimension;
 import java.awt.FlowLayout;
@@ -33,7 +35,7 @@ import javax.swing.SwingUtilities;
  *
  * @author balla
  */
-public class SwingView implements GameView {
+public class SwingView implements GameView, PlayerListener {
 
     private static final int MODE_NONE = 0;
     private static final int MODE_YESNO = 1;
@@ -41,6 +43,7 @@ public class SwingView implements GameView {
     private static final int MODE_TEXT = 3;
 
     private final JPanel panel = new JPanel(new BorderLayout());
+    private final JLabel statsLabel = new JLabel("HP: -   |   DMG: -", javax.swing.SwingConstants.CENTER);
     private final ImagePanel imagePanel = new ImagePanel();
     private final JTextArea log = new JTextArea();
     private final JLabel promptLabel = new JLabel(" ");
@@ -84,6 +87,11 @@ public class SwingView implements GameView {
         bottom.add(controls, BorderLayout.SOUTH);
         bottom.setPreferredSize(new Dimension(100, 240)); // ~30% of the window
 
+        // Live stats bar (updated via the Observer pattern)
+        statsLabel.setFont(new Font("SansSerif", Font.BOLD, 16));
+        statsLabel.setBorder(BorderFactory.createEmptyBorder(6, 8, 6, 8));
+
+        panel.add(statsLabel, BorderLayout.NORTH);
         panel.add(imagePanel, BorderLayout.CENTER);       // ~70% of the window
         panel.add(bottom, BorderLayout.SOUTH);
 
@@ -118,8 +126,19 @@ public class SwingView implements GameView {
         SwingUtilities.invokeLater(() -> {
             log.setText("");
             imagePanel.clear();
+            statsLabel.setText("HP: -   |   DMG: -");
             setMode(MODE_NONE);
         });
+    }
+
+    // ----------------------------------------------------------------
+    // PlayerListener (Observer) — live stats display
+    // ----------------------------------------------------------------
+
+    @Override
+    public void onPlayerChanged(Player player) {
+        SwingUtilities.invokeLater(()
+                -> statsLabel.setText("HP: " + player.hp + "   |   DMG: " + player.dmg));
     }
 
     // ----------------------------------------------------------------

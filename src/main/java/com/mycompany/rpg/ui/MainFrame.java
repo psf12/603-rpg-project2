@@ -167,7 +167,10 @@ public class MainFrame extends JFrame {
 
         Thread gameThread = new Thread(() -> {
             try {
-                new GameEngine(new Player(100, 10), scoreDao).run();
+                Player player = new Player(100, 10);
+                player.addListener(gameView);   // live stats via Observer pattern
+                player.fireStatsChanged();       // show starting stats
+                new GameEngine(player, scoreDao).run();
                 gameView.show("");
                 gameView.show("Press Continue to return to the menu.");
                 gameView.waitForContinue();

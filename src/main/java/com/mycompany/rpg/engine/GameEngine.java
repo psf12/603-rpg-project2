@@ -68,6 +68,7 @@ public class GameEngine {
                 }
             }
 
+            player.fireStatsChanged(); // keep the live stats display current each turn
             GameIO.waitForContinue();
         }
 

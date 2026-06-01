@@ -10,13 +10,18 @@ import com.mycompany.rpg.ui.*;
  *
  * @author balla
  */
+import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.List;
 
 public class Player {
     public int hp;
     public int dmg;
 
     public ItemManager itemManager;
+
+    // Observers notified when the player's stats change (Observer pattern)
+    private final List<PlayerListener> listeners = new ArrayList<>();
 
     public Player(int hp, int dmg) {
         this.hp = hp;
@@ -26,6 +31,21 @@ public class Player {
         this.itemManager = new ItemManager(this);
     }
 
+    public void addListener(PlayerListener listener) {
+        listeners.add(listener);
+    }
+
+    public void removeListener(PlayerListener listener) {
+        listeners.remove(listener);
+    }
+
+    /** Notify all observers that the player's stats have changed. */
+    public void fireStatsChanged() {
+        for (PlayerListener listener : listeners) {
+            listener.onPlayerChanged(this);
+        }
+    }
+
     public boolean isAlive() {
         return hp > 0;
     }
@@ -33,11 +53,13 @@ public class Player {
     public void takeDMG(int dmg){
         this.hp -= dmg;
         GameIO.show(dmg + " DMG taken!");
+        fireStatsChanged();
     }
-    
+
     public void Heal(int amount){
         this.hp += amount;
         GameIO.show(amount + " Healed!");
+        fireStatsChanged();
     }
 
     public void displayStats() {

@@ -73,6 +73,7 @@ public class ItemManager {
             inventory.add(item);
             player.hp += item.hp;
             player.dmg += item.dmg;
+            player.fireStatsChanged();
 
             GameIO.show("You received: " + item.name);
     }
