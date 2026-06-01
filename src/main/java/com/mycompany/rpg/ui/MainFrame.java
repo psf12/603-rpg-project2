@@ -5,7 +5,6 @@ import com.mycompany.rpg.engine.GameEngine;
 import com.mycompany.rpg.model.Player;
 import com.mycompany.rpg.model.ScoreEntry;
 import java.awt.BorderLayout;
-import java.awt.Color;
 import java.awt.Component;
 import java.awt.Dimension;
 import java.awt.FlowLayout;
@@ -53,7 +52,7 @@ public class MainFrame extends JFrame {
 
     public MainFrame(ScoreDAO scoreDao) {
         this.scoreDao = scoreDao;
-        setTitle("Into the Forest — RPG");
+        setTitle("RPG Game");
         setDefaultCloseOperation(EXIT_ON_CLOSE);
         setSize(1000, 760);
         setMinimumSize(new Dimension(720, 560));
@@ -84,11 +83,6 @@ public class MainFrame extends JFrame {
         box.setOpaque(false);
         box.setLayout(new BoxLayout(box, BoxLayout.Y_AXIS));
 
-        JLabel title = new JLabel("Into the Forest");
-        title.setForeground(Color.WHITE);
-        title.setFont(new Font("Serif", Font.BOLD, 48));
-        title.setAlignmentX(Component.CENTER_ALIGNMENT);
-
         JButton newGame = menuButton("New Game");
         JButton leaderboard = menuButton("Leaderboard");
         JButton quit = menuButton("Quit");
@@ -100,8 +94,6 @@ public class MainFrame extends JFrame {
         });
         quit.addActionListener(e -> dispose());
 
-        box.add(title);
-        box.add(Box.createVerticalStrut(30));
         box.add(newGame);
         box.add(Box.createVerticalStrut(12));
         box.add(leaderboard);

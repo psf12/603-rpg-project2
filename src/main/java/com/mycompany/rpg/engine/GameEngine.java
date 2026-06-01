@@ -43,7 +43,7 @@ public class GameEngine {
         GameIO.show("Your cloth futile against the cold that traces your skin.");
         GameIO.show("No knowledge of forward or back, you give up. You step into the tempered mist");
         GameIO.show("Will you make it back, or will you find your grandmother? Each step a ticking hand,");
-        GameIO.show("You question: 'Can I make it back alive?'");
+        GameIO.show("Passing the eleventh hour.");
         GameIO.waitForContinue();
 
         int savedHighScore = scoreDao.getHighScore();
